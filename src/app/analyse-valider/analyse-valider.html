@@ -1,0 +1,46 @@
+<!-- src/app/analyses-validees/analyses-validees.component.html -->
+
+<div class="container mt-4">
+  <h2 class="text-center mb-4">📊 Analyses Validées</h2>
+
+  <!-- Loader -->
+  <div class="text-center" *ngIf="loading">
+    <div class="spinner-border text-success" role="status"></div>
+    <p class="mt-2">Chargement des analyses validées...</p>
+  </div>
+
+  <!-- Tableau -->
+  <div *ngIf="!loading && analyses.length > 0" class="table-responsive">
+    <table class="table table-hover table-striped align-middle shadow-sm">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Type Examen</th>
+          <th>Description</th>
+          <th>Résultats</th>
+          <th>Patient</th>
+          <th>Date Analyse</th>
+          <th>Date Validation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let analyse of analyses" class="animate__animated animate__fadeIn">
+          <td>{{ analyse.id }}</td>
+          <td>{{ analyse.typeExamenNom || 'N/A' }}</td>
+          <td>{{ analyse.description || '---' }}</td>
+          <td>
+            <span class="badge bg-success">{{ analyse.resultats || 'En attente' }}</span>
+          </td>
+          <td>{{ analyse.patientNom || ('Patient #' + analyse.patientNom) }}</td>
+          <td>{{ analyse.dateAnalyse | date:'short' }}</td>
+          <td>{{ analyse.dateValidation | date:'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Aucun résultat -->
+  <div *ngIf="!loading && analyses.length === 0" class="alert alert-info text-center">
+    Aucune analyse validée trouvée.
+  </div>
+</div>
