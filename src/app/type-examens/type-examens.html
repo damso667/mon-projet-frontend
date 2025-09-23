@@ -1,16 +1,36 @@
-<p>type-examens works!</p>
 <div class="container mt-4">
   <h3 class="mb-3">Types d’examens</h3>
+
+  <!-- Message d'erreur -->
   <div *ngIf="message" class="alert alert-warning py-2">{{ message }}</div>
 
-  <div class="row" >
-    <div class="col-md-4 mb-3">
-      <div class="card shadow-sm fade-row">
-        <div class="card-body" *ngFor="let t of examens">
-          <h6 class="mb-1">{{ t.nom }}</h6>
+  <!-- Barre de recherche -->
+  <div class="mb-3">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Rechercher un type d’examen..."
+      [(ngModel)]="searchTerm"
+      (input)="applyFilter()">
+  </div>
+
+   <hr>
+   <br><br>
+
+  <!-- Liste des types d’examen -->
+  <div class="row row-cols-1 row-cols-md-3 g-3">
+    <div class="col" *ngFor="let t of filteredExamens">
+      <div class="card h-100 shadow-sm border-0 hover-card">
+        <div class="card-body">
+          <h6 class="mb-1 fw-bold">{{ t.nom }}</h6>
           <p class="text-muted small mb-0">{{ t.description || '—' }}</p>
         </div>
       </div>
+    </div>
+
+    <!-- Aucun résultat -->
+    <div *ngIf="filteredExamens.length === 0" class="col-12">
+      <div class="alert alert-secondary">Aucun type d'examen trouvé.</div>
     </div>
   </div>
 </div>
