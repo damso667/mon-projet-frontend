@@ -49,6 +49,14 @@ export class Reactifs implements OnInit {
       });
     }
   }
+    diminuerStock(id: number) {
+    if (this.quantiteAugmenter > 0) {
+      this.reactifService.diminuerStock(id, this.quantiteAugmenter).subscribe(() => {
+        this.loadReactifs();
+        this.quantiteAugmenter = 0;
+      });
+    }
+  }
 
   resetForm() {
     this.newReactif = {

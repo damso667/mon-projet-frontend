@@ -41,4 +41,7 @@ export class Secretaire {
   augmenterStock(id: number, quantite: number): Observable<Reactif> {
     return this.http.put<Reactif>(`${this.apiUrl}/reactifs/${id}/augmenter?quantite=${quantite}`, {});
   }
+    diminuerStock(id: number, quantite: number): Observable<Reactif> {
+    return this.http.put<Reactif>(`${this.apiUrl}/${id}/diminuer?quantite=${quantite}`, {});
+  }
 }
