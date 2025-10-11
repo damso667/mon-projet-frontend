@@ -16,7 +16,7 @@ export class AnalysesPrescrire implements OnInit {
   selectedPatient!: number;
   selectedExamen!: number;
   description: string = '';
-  message = '';
+  message : string | null = null;
 
   constructor(
     private medecinService: Medecin,
@@ -31,7 +31,12 @@ export class AnalysesPrescrire implements OnInit {
   prescrire() {
     this.medecinService.prescrireAnalyse(this.selectedPatient, this.selectedExamen, this.description)
       .subscribe({
-        next: () => this.message = 'Analyse prescrite ✅',
+        next: () => {this.message = 'Analyse prescrite ✅'
+         setTimeout(() =>{
+         this.message = null
+        },2000)
+        },
+
         error: () => this.message = 'Erreur lors de la prescription.'
       });
   }

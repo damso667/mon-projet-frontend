@@ -21,6 +21,7 @@
   <div class="row row-cols-1 row-cols-md-3 g-3">
     <div class="col" *ngFor="let t of filteredExamens">
       <div class="card h-100 shadow-sm border-0 hover-card">
+        <h4 class="mb-1 fw-bold">{{ t.id }}</h4>
         <div class="card-body">
           <h6 class="mb-1 fw-bold">{{ t.nom }}</h6>
           <p class="text-muted small mb-0">{{ t.description || '—' }}</p>

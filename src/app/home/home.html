@@ -10,7 +10,7 @@
       <button class="btn btn-primary btn-lg px-4" (click)="agir()">
         {{ role ? 'Entrer dans mon espace' : 'Se connecter pour agir' }}
       </button>
-      <a class="btn btn-outline-secondary btn-lg px-4" href="#sections">Découvrir</a>
+      <a class="btn btn-outline-secondary btn-lg px-4" (click)="logout()">Déconnecter</a>
     </div>
   </div>
   <!-- bulles décoratives -->

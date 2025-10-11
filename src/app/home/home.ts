@@ -16,6 +16,7 @@ interface QuickLink{
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
+
 export class Home  {
   role: 'ROLE_MEDECIN' | 'ROLE_TECHNITIEN' | 'ROLE_SECRETAIRE' | null = null;
   constructor(private auth: Auth, private router: Router) {
@@ -30,5 +31,9 @@ export class Home  {
 
 
     else this.router.navigate(['/login']);
+  }
+    logout() {
+    this.auth.logout();
+    this.router.navigate(['/login']);
   }
 }

@@ -9,7 +9,7 @@ export interface Reactif {
   code: string;
   unite: string;
   stock: number;
-  dernierModifieParId?: number;
+  dernierModifieParId: number;
 }
 
 export interface ReactifRequest {
@@ -26,7 +26,7 @@ export interface ReactifRequest {
   providedIn: 'root'
 })
 export class Secretaire {
-  private apiUrl = 'http://localhost:8080/api/reactifs';
+  private apiUrl = 'http://localhost:8080/api/secretaires';
 
   constructor(private http: HttpClient) {}
 
@@ -43,5 +43,11 @@ export class Secretaire {
   }
     diminuerStock(id: number, quantite: number): Observable<Reactif> {
     return this.http.put<Reactif>(`${this.apiUrl}/${id}/diminuer?quantite=${quantite}`, {});
+  }
+
+  //DELETE api/secretaire/supprimer/{id}
+
+  supprimer(id:number){
+    return this.http.delete(`${this.apiUrl}/supprimer/${id}`,{});
   }
 }

@@ -10,7 +10,7 @@ import { NgIf, NgFor, DatePipe, NgForOf } from '@angular/common';
 })
 export class AnalysesAFaire implements OnInit {
   analyses: any[] = [];
-  message: string = '';
+  message: string | null = null;
 
   constructor(private technicienService: Technicien) {}
 
@@ -28,18 +28,29 @@ export class AnalysesAFaire implements OnInit {
         }
       },
       error: () => this.message = "Erreur de chargement des analyses."
+
     });
   }
+
+
 
   prendreAnalyse(id: number) {
     this.technicienService.prendreAnalyse(id).subscribe({
       next: (res: any) => {
         if (res.success) {
-          this.message = "Analyse prise avec succès ✅";
+          this.message = "Analyse prise avec succès ✅"
           this.chargerAnalyses(); // refresh
+
+          setTimeout(() =>{
+         this.message = null
+        },2000)
+        
         } else {
           this.message = res.message;
         }
+     setTimeout(() => {
+    this.message  = null;
+  }, 1000);
       },
       error: () => this.message = "Impossible de prendre l’analyse."
     });

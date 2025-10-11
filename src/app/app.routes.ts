@@ -13,6 +13,7 @@ import { AnalyseValider } from './analyse-valider/analyse-valider';
 import { NgModule, Component } from '@angular/core';
 import { Dashbord } from './dashbord/dashbord';
 import { Notifications } from './notifications/notifications';
+import { MesAnalyses } from './mes-analyses/mes-analyses';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -30,6 +31,8 @@ export const routes: Routes = [
   { path: 'analyses-a-faire', component: AnalysesAFaire },
   { path: 'prelevements', component: Prelevements },
   { path: 'resultats', component: Resultats },
+  { path: 'mes-analyses', component: MesAnalyses },
+
 
   // Référentiels
   { path: 'reactifs', component: Reactifs },

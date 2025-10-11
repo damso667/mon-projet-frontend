@@ -1,1 +1,39 @@
-<p>mes-analyses works!</p>
+<div class="container py-4">
+  <h2 class="mb-4">Mes analyses récupérées</h2>
+
+  <div *ngIf="loading" class="alert alert-info">Chargement...</div>
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+  <table class="table table-hover table-bordered" *ngIf="analyses.length > 0">
+    <thead class="table-light">
+      <tr>
+        <th>#</th>
+        <th>Patient</th>
+        <th>Type d’examen</th>
+        <th>Description</th>
+        <th>Résultat</th>
+        <th>Date analyse</th>
+        <th>Statut</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let a of analyses">
+        <td>{{ a.id }}</td>
+        <td>{{ a.patientId }}</td>
+        <td>{{ a.typeExamenId }}</td>
+        <td>{{ a.description }}</td>
+        <td>{{ a.resultats || '-' }}</td>
+        <td>{{ a.dateAnalyse | date:'short' }}</td>
+        <td>
+          <span class="badge" [ngClass]="badgeClass(a.valide)">
+            {{ badgeText(a.valide) }}
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading && analyses.length === 0" class="alert alert-secondary">
+    Aucune analyse récupérée pour le moment.
+  </div>
+</div>

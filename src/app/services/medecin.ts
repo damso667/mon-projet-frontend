@@ -41,10 +41,12 @@ export class Medecin {
   }
 
   // POST /api/medecins/analyses
-  prescrireAnalyse(patientId: number, typeExamenId: number, description?: string): Observable<any> {
+  prescrireAnalyse(patientId: number, typeExamenId: number, description: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/analyses`,
-      { description },
-      { params: { patientId, typeExamenId }, withCredentials: true });
+       { patientId,
+        typeExamenId,
+        description
+        });
   }
 
   // PATCH /api/medecins/analyses/{id}/valider

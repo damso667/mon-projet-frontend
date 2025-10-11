@@ -11,28 +11,29 @@
 
         <!-- MENU MEDECIN -->
         <ng-container *ngIf="role === 'ROLE_MEDECIN'">
-          <li class="nav-item"><a class="nav-link" routerLink="/patients">👨‍👩‍👧‍👦Patients</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/mes-patients">👨‍👩‍👧‍👦Mes Patients</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/analyses-prescrire">💊 Prescrire</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/patients">Patients</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/mes-patients">Mes Patients</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/analyses-prescrire"> Prescrire</a></li>
 
-          <li class="nav-item"><a class="nav-link" routerLink="/resultats"> 🧬 Résultats</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/type-examens"> 🧬 Type Examens</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/analyses-valider"> ✔ Valider</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/resultats">  Résultats</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/type-examens">  Type Examens</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/analyses-valider">  Valider</a></li>
            <li class="nav-item"><a class="nav-link" routerLink="/notifications"> 🔔 Notifications <span class="text-danger">{{this.number}}</span></a></li>
         </ng-container>
 
         <!-- MENU TECHNICIEN -->
         <ng-container *ngIf="role === 'ROLE_TECHNITIEN'">
-          <li class="nav-item"><a class="nav-link" routerLink="/analyses-a-faire">🧬Analyses à faire</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/prelevements">💉 Prélèvements</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/resultats">🧬Résultats</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/analyses-a-faire">Analyses à faire</a></li>
+             <li class="nav-item"><a class="nav-link" routerLink="/mes-analyses">Mes Analyses</a></li>
 
-
+          <li class="nav-item"><a class="nav-link" routerLink="/prelevements"> Prélèvements</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/resultats">Résultats</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/reactifs">🧪 Reactifs</a></li>
         </ng-container>
 
         <ng-container *ngIf="role === 'ROLE_SECRETAIRE'">
           <li class="nav-item"><a class="nav-link" routerLink="/reactifs">🧪 Reactifs</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/type-examens"> 🧬 Type Examens</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/type-examens"> Type Examens</a></li>
         </ng-container>
 
       </ul>

@@ -11,7 +11,7 @@ import { Medecin } from '../services/medecin';
 export class PatientsList implements OnInit {
 
   patients: any[] = [];
-  message: string = '';
+    message: string | null = null;
 
   constructor(private medecinService: Medecin) {}
 
@@ -31,6 +31,9 @@ export class PatientsList implements OnInit {
       next: () => {
         this.message = 'Patient récupéré ✅';
         this.chargerPatients();
+        setTimeout(() =>{
+         this.message = null
+        },2000)
       },
       error: () => this.message = 'Impossible de récupérer ce patient.'
     });

@@ -53,9 +53,9 @@
       <tbody>
         <tr *ngFor="let a of analyses" class="fade-row">
           <td>{{a.id}}</td>
-          <td>{{a.patientId}}</td>
+          <td>{{a.patientId}}</td>   
           <td>{{a.typeExamenNom || a.typeExamenId}}</td>
-          <td class="small">{{a.resultats || '—'}}</td>
+          <td class="badge bg-success">{{a.resultats || '—'}}</td>
           <td><button class="btn btn-sm btn-success" (click)="valider(a.id)">Valider</button></td>
         </tr>
       </tbody>
