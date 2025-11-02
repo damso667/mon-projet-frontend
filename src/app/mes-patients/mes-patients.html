@@ -1,4 +1,4 @@
-<p>mes-patients works!</p>
+
 
 <div class="container mt-4">
   <h3 class="mb-3">Mes Patients</h3>
@@ -9,7 +9,7 @@
     <table class="table table-hover align-middle">
       <thead class="table-light">
         <tr>
-          <th style="width:5%">#</th>
+          <th style="width:5%">ID</th>
           <th style="width:45%">Nom & Photo</th>
           <th class="text-center" style="width:25%">Statut Prélèvement</th>
           <th class="text-center" style="width:25%">Statut Consultation</th>
@@ -17,7 +17,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let p of patients; let i = index; trackBy: trackByPatient">
-          <th scope="row">{{ i + 1 }}</th>
+          <th scope="row">{{ p.id }}</th>
 
           <!-- Nom + Photo -->
           <td>
@@ -37,7 +37,7 @@
           <td class="text-center">
             <span class="badge rounded-pill"
                   [ngClass]="{
-                    'bg-success': p.statutPrelevement === 'EFFECTUE',
+                    'bg-success': p.statutPrelevement === 'EFFECTUER',
                     'bg-warning text-dark': p.statutPrelevement === 'EN_COURS',
                     'bg-danger': p.statutPrelevement === 'NON_EFFECTUE',
                     'bg-secondary': !(p.statutPrelevement)

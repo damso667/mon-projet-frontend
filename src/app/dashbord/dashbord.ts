@@ -24,13 +24,13 @@ export class Dashbord  implements OnInit{
   loadActions() {
     if (this.role === 'ROLE_MEDECIN') {
       this.actions = [
-        { title: '🧒 Patients', icon: 'bi bi-people', route: '/patients', color: 'primary' },
-        { title: '👨‍👩‍👧‍👦 Mes Patients', icon: 'bi bi-person-lines-fill', route: '/mes-patients', color: 'info' },
+        { title: ' Patients', icon: 'bi bi-people', route: '/patients', color: 'primary' },
+        { title: ' Mes Patients', icon: 'bi bi-person-lines-fill', route: '/mes-patients', color: 'info' },
         { title: 'Prescrire', icon: 'bi bi-prescription', route: '/analyses-prescrire', color: 'success' },
-        { title: '✔ Resultat-Valider', icon: 'bi bi-check-circle', route: '/analyses-valider', color: 'warning' },
-        { title: ' 🧬 Résultats', icon: 'bi bi-file-earmark-text', route: '/resultats', color: 'dark' },
-        { title: '💉 Type Examens', icon: 'bi bi-clipboard-data', route: '/type-examens', color: 'dark' },
-      ];
+        { title: ' Resultat-Valider', icon: 'bi bi-check-circle', route: '/analyses-valider', color: 'warning' },
+        { title: ' Résultats', icon: 'bi bi-file-earmark-text', route: '/resultats', color: 'dark' },
+        { title: ' Type Examens', icon: 'bi bi-clipboard-data', route: '/type-examens', color: 'dark' },
+      ]; 
     } else if (this.role === 'ROLE_TECHNITIEN') {
       this.actions = [
         { title: '🧬 Analyses à faire', icon: 'bi bi-flask', route: '/analyses-a-faire', color: 'primary' },
@@ -42,8 +42,8 @@ export class Dashbord  implements OnInit{
       ];
     }else if(this.role === 'ROLE_SECRETAIRE'){
       this.actions = [
-       { title: '🧪 Reactif', icon: 'bi bi-flask', route: '/reactifs', color: 'primary' },
-       { title: '💉 Type Examens', icon: 'bi bi-clipboard-data', route: '/type-examens', color: 'dark' },
+       { title: ' Reactif', icon: 'bi bi-flask', route: '/reactifs', color: 'primary' },
+       { title: ' Type Examens', icon: 'bi bi-clipboard-data', route: '/type-examens', color: 'dark' },
       ]
     }
   }

@@ -30,7 +30,7 @@
     <h6 class="mb-2">Analyses en cours</h6>
     <table class="table table-hover table-striped">
       <thead class="table-dark">
-        <tr><th>ID</th><th>Patient</th><th>Type</th><th>État</th></tr>
+        <tr><th>ID</th><th>Patient</th><th>Type Examen</th><th>État</th></tr>
       </thead>
       <tbody>
         <tr *ngFor="let a of analyses" class="fade-row">
@@ -48,14 +48,14 @@
     <h6 class="mb-2">Résultats à valider</h6>
     <table class="table table-hover table-striped">
       <thead class="table-dark">
-        <tr><th>ID</th><th>Patient</th><th>Type</th><th>Résultats</th><th>Action</th></tr>
+        <tr><th>ID</th><th>Patient-ID</th><th>Type-Examen ID</th><th>Résultats</th><th>Action</th></tr>
       </thead>
       <tbody>
         <tr *ngFor="let a of analyses" class="fade-row">
           <td>{{a.id}}</td>
           <td>{{a.patientId}}</td>   
           <td>{{a.typeExamenNom || a.typeExamenId}}</td>
-          <td class="badge bg-success">{{a.resultats || '—'}}</td>
+          <td ><span class="badge bg-success">{{a.resultats || '—'}}</span></td>
           <td><button class="btn btn-sm btn-success" (click)="valider(a.id)">Valider</button></td>
         </tr>
       </tbody>
