@@ -33,10 +33,10 @@ export class Dashbord  implements OnInit{
       ]; 
     } else if (this.role === 'ROLE_TECHNITIEN') {
       this.actions = [
-        { title: '🧬 Analyses à faire', icon: 'bi bi-flask', route: '/analyses-a-faire', color: 'primary' },
-        { title: '💉 Prélèvements', icon: 'bi bi-droplet', route: '/prelevements', color: 'info' },
-        { title: '🧬 Résultats', icon: 'bi bi-file-earmark-medical', route: '/resultats', color: 'success' },
-              { title: '🧬 Mes Analyses', icon: 'bi bi-file-earmark-medical', route: '/mes-analyses', color: 'success' },
+        { title: ' Analyses à faire', icon: 'bi bi-flask', route: '/analyses-a-faire', color: 'primary' },
+        { title: ' Prélèvements', icon: 'bi bi-droplet', route: '/prelevements', color: 'info' },
+        { title: ' Résultats', icon: 'bi bi-file-earmark-medical', route: '/resultats', color: 'success' },
+              { title: ' Mes Analyses', icon: 'bi bi-file-earmark-medical', route: '/mes-analyses', color: 'success' },
         // { title: 'Réactifs', icon: 'bi bi-box-seam', route: '/reactifs', color: 'warning' },
 
       ];

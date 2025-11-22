@@ -7,11 +7,11 @@
     <thead class="table-dark">
       <tr>
         <th>ID</th>
-        <th>Patient</th>
-        <th>Médecin</th>
-        <th>Type Examen</th>
+        <th>Patient ID</th>
+        <th>Médecin ID</th>
+        <th>Type Examen ID</th>
         <th>Description</th>
-        <th>Date Analyse</th>
+        <th>Date D'Envoie</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -19,7 +19,7 @@
       <tr *ngFor="let a of analyses" class="fade-in-row">
         <td>{{ a.id }}</td>
         <td>{{ a.patientId }}</td>
-        <td>{{ a.medecinId }}</td>
+        <td>Dr {{ a.medecinId }}</td>
         <td>{{ a.typeExamenId }}</td>
         <td>{{ a.description }}</td>
         <td>{{ a.dateAnalyse | date: 'short' }}</td>
