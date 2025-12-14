@@ -10,10 +10,10 @@
         <div class="card-body">
           <h5 class="card-title">{{ p.nom }} {{ p.prenom }}</h5>
           <p class="card-text">
-            🥇  N° {{p.id}}  <br>
-            📧 {{ p.email }} <br>
-            📱 {{ p.telephone }} <br>
-            🗓️ Né(e) le {{ p.dateNaissance }}<br>
+             <a href="#" class="bi bi-pin-angle-fill ">  N° {{p.id}}</a>   <br>
+            <a href="#" class="bi bi-envelope-at-fill ">  {{ p.email }}</a> <br>
+            <a href="#" class="bi bi-telephone-fill ">  {{ p.telephone }}</a> <br>
+            <a href="#" class="bi bi-calendar-fill ">  Né(e) le {{ p.dateNaissance }}</a><br>
 
           </p>
           <button class="btn btn-sm btn-success" (click)="recuperer(p.id)">Suivre</button>

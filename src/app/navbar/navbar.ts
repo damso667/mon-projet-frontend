@@ -12,6 +12,7 @@ import { Medecin,Notification} from '../services/medecin';
 })
 export class Navbar {
   role: 'ROLE_MEDECIN' | 'ROLE_TECHNITIEN' | 'ROLE_SECRETAIRE' | null = null;
+  animateBadge:boolean = false
 
   constructor(private auth: Auth, private router: Router,private notificationService: Medecin) {
     this.role = this.auth.getRole?.() as 'ROLE_MEDECIN' | 'ROLE_TECHNITIEN' | 'ROLE_SECRETAIRE' | null ; // méthode que tu avais pour récupérer le rôle
@@ -46,13 +47,25 @@ export class Navbar {
       });
   }
 
-    marquerCommeLue(notif: Notification): void {
-      this.notificationService.marquerCommeLue(notif.id).subscribe({
-        next: () => {
-          notif.lue = true; // mise à jour locale pour éviter de recharger
-          this.number--
-        },
-        error: (err) => console.error("Erreur maj notification", err)
-      });
+marquerCommeLue(notif: Notification): void {
+  if (notif.lue) return; // sécurité
+
+  this.notificationService.marquerCommeLue(notif.id).subscribe({
+    next: () => {
+      notif.lue = true;
+
+      // éviter valeurs négatives
+      if (this.number > 0) {
+        this.number--;
+this.animateBadge = true;
+setTimeout(() => this.animateBadge = false, 200);
+
+      }
+    },
+    error: (err) => {
+      console.error("Erreur mise à jour notification", err);
     }
+  });
+}
+
 }
