@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
-export interface AnalyseDto{
-  id:number;
+export interface AnalyseDto {
+  id: number;
   patientId: number;
-  medecinId:number;
+  medecinId: number;
   technicienId: number;
   typeExamenId: number;
   description: string;
@@ -15,52 +15,48 @@ export interface AnalyseDto{
   dateValidation: string | null;
 }
 
-
-
 @Injectable({
   providedIn: 'root'
 })
 export class Technicien {
-   private apiUrl = 'https://backend-mon-projet-0f46.onrender.com/api/techniciens';
+  private apiUrl = 'https://backend-mon-projet-0f46.onrender.com/api/techniciens';
 
   constructor(private http: HttpClient) {}
 
+  // Option réutilisable pour éviter les répétitions
+  private httpOptions = { withCredentials: true };
+
   // GET /api/techniciens/analyses-a-faire
   getAnalysesAFaire(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/analyses-a-faire`, { withCredentials: true });
+    return this.http.get(`${this.apiUrl}/analyses-a-faire`, this.httpOptions);
   }
 
   // GET /api/techniciens/mes-analyses
-
-   getMesAnalyse():Observable<any>{
-    return this.http.get(`${this.apiUrl}/mes-analyses`, { withCredentials: true });
-
-   }
+  getMesAnalyse(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/mes-analyses`, this.httpOptions);
+  }
 
   // POST /api/techniciens/analyses/{id}/prendre
   prendreAnalyse(id: number): Observable<any> {
-    return this.http.post(`${this.apiUrl}/analyses/${id}/prendre`, {}, { withCredentials: true });
+    return this.http.post(`${this.apiUrl}/analyses/${id}/prendre`, {}, this.httpOptions);
   }
-
 
   // POST /api/techniciens/analyses/{id}/prelevements
   enregistrerPrelevement(id: number, typePrelevement: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/analyses/${id}/prelevements?typePrelevement=${typePrelevement}`, {withCredentials: true})
-
+    // Correction : Ajout d'un body vide {} avant les options
+    return this.http.post(`${this.apiUrl}/analyses/${id}/prelevements?typePrelevement=${typePrelevement}`, {}, this.httpOptions);
   }
 
   // PATCH /api/techniciens/analyses/{id}/resultats
   saisirResultats(id: number, resultats: string): Observable<any> {
-    return this.http.patch(`${this.apiUrl}/analyses/${id}/resultats`, resultats, { withCredentials: true });
+    return this.http.patch(`${this.apiUrl}/analyses/${id}/resultats`, resultats, this.httpOptions);
   }
 
- // GET /api/techniciens/analyses/recuperees
-   mesAnalyse(): Observable<AnalyseDto[]> {
-    return this.http.get<any>(`${this.apiUrl}/analyse/recuperees`).pipe(
+  // GET /api/techniciens/analyses/recuperees
+  mesAnalyse(): Observable<AnalyseDto[]> {
+    // AJOUTÉ ICI : withCredentials
+    return this.http.get<any>(`${this.apiUrl}/analyse/recuperees`, this.httpOptions).pipe(
       map(resp => resp.data as AnalyseDto[])
-    )
+    );
   }
-
- 
-
 }
