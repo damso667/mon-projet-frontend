@@ -21,7 +21,7 @@ export interface AnalyseDto{
   providedIn: 'root'
 })
 export class Technicien {
-   private apiUrl = 'http://localhost:8080/api/techniciens';
+   private apiUrl = 'https://backend-mon-projet-0f46.onrender.com/api/techniciens';
 
   constructor(private http: HttpClient) {}
 

@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <h3 class="mb-3">📢 Notifications</h3>
+  <h3 class="mb-3 bi bi-bell-fill"> Notifications</h3>
 
   <!-- Loader -->
   <div *ngIf="loading" class="text-center my-3">
@@ -10,13 +10,12 @@
 
   <!-- Liste -->
   <ul class="list-group">
-    <li *ngFor="let notif of notifications"
-        class="list-group-item d-flex justify-content-between align-items-center"
-        [ngClass]="{'list-group-item-light': notif.lue, 'list-group-item-warning': !notif.lue}"
-        (click)="marquerCommeLue(notif)">
+    <li *ngFor="let notif of notifications" class="list-group-item d-flex justify-content-between align-items-center"    
+      [ngClass]="{'list-group-item-light': notif.lue, 'list-group-item-warning': !notif.lue}"
+      (click)="marquerCommeLue(notif)">
 
       <div>
-        <strong *ngIf="!notif.lue" >🔔</strong>
+        <strong *ngIf="!notif.lue" class="bi bi-bell-fill"></strong>
         {{ notif.message }}
         <br>
         <small class="text-muted">

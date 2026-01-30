@@ -7,7 +7,7 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class Auth {
-    private apiUrl = 'http://localhost:8080/api'; // ton API Spring Boot
+    private apiUrl = 'https://backend-mon-projet-0f46.onrender.com/api'; 
   private roleSubject = new BehaviorSubject<string | null>(null);
   role$ = this.roleSubject.asObservable();
 
@@ -16,7 +16,7 @@ export class Auth {
   login(email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/auth/login`,
       { email, password },
-      { withCredentials: true } // ⚠️ important pour les cookies de session
+      { withCredentials: true } 
     ).pipe(
       tap((res: any) => {
         if (res.role) {

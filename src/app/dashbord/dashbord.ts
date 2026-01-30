@@ -6,15 +6,15 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-dashbord',
-  imports: [FormsModule,NgForOf,NgClass],
+  imports: [FormsModule, NgForOf, NgClass],
   templateUrl: './dashbord.html',
   styleUrl: './dashbord.css'
 })
-export class Dashbord  implements OnInit{
+export class Dashbord implements OnInit {
   role: 'ROLE_MEDECIN' | 'ROLE_TECHNITIEN' | 'ROLE_SECRETAIRE' | null = null;
   actions: { title: string; icon: string; route: string; color: string; }[] = [];
 
-  constructor(private auth: Auth, private router: Router) {}
+  constructor(private auth: Auth, private router: Router) { }
 
   ngOnInit(): void {
     this.role = this.auth.getRole?.() as 'ROLE_MEDECIN' | 'ROLE_TECHNITIEN' | 'ROLE_SECRETAIRE' | null;
@@ -30,24 +30,25 @@ export class Dashbord  implements OnInit{
         { title: ' Resultat-Valider', icon: 'bi bi-check-circle', route: '/analyses-valider', color: 'warning' },
         { title: ' Résultats', icon: 'bi bi-file-earmark-text', route: '/resultats', color: 'dark' },
         { title: ' Type Examens', icon: 'bi bi-clipboard-data', route: '/type-examens', color: 'dark' },
-      ]; 
+        { title: ' Notifications', icon: 'bi bi-bell-fill', route: '/notifications', color: 'dark' },
+
+      ];
     } else if (this.role === 'ROLE_TECHNITIEN') {
       this.actions = [
         { title: ' Analyses à faire', icon: 'bi bi-flask', route: '/analyses-a-faire', color: 'primary' },
         { title: ' Prélèvements', icon: 'bi bi-droplet', route: '/prelevements', color: 'info' },
         { title: ' Résultats', icon: 'bi bi-file-earmark-medical', route: '/resultats', color: 'success' },
-              { title: ' Mes Analyses', icon: 'bi bi-file-earmark-medical', route: '/mes-analyses', color: 'success' },
+        { title: ' Mes Analyses', icon: 'bi bi-file-earmark-medical', route: '/mes-analyses', color: 'success' },
         // { title: 'Réactifs', icon: 'bi bi-box-seam', route: '/reactifs', color: 'warning' },
 
       ];
-    }else if(this.role === 'ROLE_SECRETAIRE'){
+    } else if (this.role === 'ROLE_SECRETAIRE') {
       this.actions = [
-       { title: ' Reactif', icon: 'bi bi-flask', route: '/reactifs', color: 'primary' },
-       { title: ' Type Examens', icon: 'bi bi-clipboard-data', route: '/type-examens', color: 'dark' },
+        { title: ' Reactif', icon: 'bi bi-flask', route: '/reactifs', color: 'primary' },
+        { title: ' Type Examens', icon: 'bi bi-clipboard-data', route: '/type-examens', color: 'dark' },
       ]
     }
   }
-
   goTo(route: string) {
     this.router.navigate([route]);
   }

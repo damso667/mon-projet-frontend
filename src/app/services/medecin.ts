@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 export interface Analyse {
   id: number;
   description?: string;
@@ -21,9 +21,9 @@ export interface Notification {
   providedIn: 'root'
 })
 export class Medecin {
-    private apiUrl = 'http://localhost:8080/api/medecins';
+    private apiUrl = 'https://backend-mon-projet-0f46.onrender.com/api/medecins';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {} 
 
   // GET /api/medecins/patients
   getPatients(disponibles: boolean = true): Observable<any[]> {
@@ -66,11 +66,32 @@ export class Medecin {
     return this.http.get<Analyse[]>(`${this.apiUrl}/analyses/validees`);
   }
 
+ // 1. On crée le sujet qui contient le nombre 
+  private unreadCountSubject = new BehaviorSubject<number>(0);
+  // 2. On expose ce sujet sous forme d'Observable pour la Navbar [cite: 2]
+  unreadCount$ = this.unreadCountSubject.asObservable();
+
+  
+
   getNotifications(): Observable<Notification[]> {
-    return this.http.get<Notification[]>(`${this.apiUrl}/notifications`);
+    return this.http.get<Notification[]>(`${this.apiUrl}/notifications`).pipe(
+      tap(notifs => {
+        // Met à jour le compteur dès que les notifications sont chargées [cite: 17]
+        const count = notifs.filter(n => !n.lue).length;
+        this.unreadCountSubject.next(count);
+      })
+    );
   }
 
   marquerCommeLue(id: number): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/notifications/${id}/marquer-lue`, {});
+    return this.http.post<void>(`${this.apiUrl}/notifications/${id}/marquer-lue`, {}).pipe(
+      tap(() => {
+        // Diminue le compteur de 1 immédiatement après le succès de l'appel 
+        const currentCount = this.unreadCountSubject.value;
+        if (currentCount > 0) {
+          this.unreadCountSubject.next(currentCount - 1);
+        }
+      })
+    );
   }
 }
