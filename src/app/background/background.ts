@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 
-import "./Background.css";
+// import "./Background.css";
 
 @Component({
   selector: 'app-background',
