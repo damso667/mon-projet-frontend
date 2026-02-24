@@ -1,59 +1,107 @@
-# TutoAgular
+# Tuto-Agular : Système de Gestion de Laboratoire Médical
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.1.
+[![Vercel Deployment](https://img.shields.io/badge/Deploy-Vercel-black?style=flat-square&logo=vercel)](https://vercel.com)
+[![Angular](https://img.shields.io/badge/Angular-20.1-DD0031?style=flat-square&logo=angular)](https://angular.dev)
 
-## Development server
+Une application web moderne pour la gestion complète d'un laboratoire d'analyses médicales, permettant la collaboration entre médecins et techniciens de laboratoire.
 
-To start a local development server, run:
+---
+
+## Captures d'écran
+
+> [!TIP]  
+> Pour afficher vos photos ici, placez-les dans le dossier `/screenshots` et mettez à jour les liens ci-dessous.
+
+|              Accueil & Connexion              |                   Tableau de Bord                   |
+| :-------------------------------------------: | :-------------------------------------------------: |
+| ![Login Placeholder](./screenshots/login.png) | ![Dashboard Placeholder](./screenshots/accueil.png) |
+|      _Interface de connexion sécurisée_       |           _Vue d'ensemble des activités_            |
+
+|                    Espace Médecin                     |                 Espace Technicien                 |
+| :---------------------------------------------------: | :-----------------------------------------------: |
+| ![Doctor View Placeholder](./screenshots/medecin.png) | ![Tech View Placeholder](./screenshots/technicien.png) |
+|         _Prescription et suivi des patients_          |      _Gestion des prélèvements et résultats_      |
+
+---
+
+## Fonctionnalités Clés
+
+### Pour les Médecins
+
+- **Gestion des Patients** : Consultation et recherche dans la liste des patients.
+- **Prescriptions** : Création de demandes d'analyses médicales.
+- **Validation** : Revue et validation des résultats d'analyses.
+- **Notifications** : Alertes en temps réel sur l'état des analyses.
+
+### Pour les Techniciens
+
+- **Gestion des Prélèvements** : Suivi des échantillons reçus.
+- **Saisie des Résultats** : Enregistrement méticuleux des données d'analyses.
+- **Gestion des Réactifs** : Inventaire et suivi des produits de laboratoire.
+- **Examens** : Configuration des types d'examens disponibles.
+
+### Pour les Secrétaires
+
+- **Gestion des Réactifs** : Supervision et mise à jour des stocks de réactifs.
+- **Types d'Examens** : Paramétrage et organisation des différents examens médicaux.
+
+---
+
+## Stack Technique
+
+- **Frontend** : [Angular v20](https://angular.dev) (Signals, Router, HttpClient)
+- **Styling** : [Bootstrap 5](https://getbootstrap.com) & [Bootstrap Icons](https://icons.getbootstrap.com)
+- **Déploiement** : [Vercel](https://vercel.com) & [GitHub Pages](https://pages.github.com)
+- **Animations** : Loader personnalisé et transitions fluides.
+
+---
+
+## Installation & Lancement
+
+### Prérequis
+
+- [Node.js](https://nodejs.org) (v18+)
+- [Angular CLI](https://github.com/angular/angular-cli)
+
+### Étapes
+
+1. **Cloner le projet**
+
+   ```bash
+   git clone <votre-url-github>
+   cd mon-projet-frontend
+   ```
+
+2. **Installer les dépendances**
+
+   ```bash
+   npm install
+   ```
+
+3. **Lancer le serveur de développement**
+   ```bash
+   npm start
+   ```
+   Accédez à l'application sur `http://localhost:4200/`.
+
+---
+
+## Build & Déploiement
+
+### Production
+
+Pour générer les fichiers de production :
 
 ```bash
-ng serve
+npm run build
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Vercel
 
-## Code scaffolding
+Le projet est configuré pour un déploiement rapide sur Vercel via le fichier `vercel.json`.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
 
-```bash
-ng generate component component-name
-```
+## Auteur
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Développé avec par Noubam Adrien
