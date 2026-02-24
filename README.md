@@ -12,7 +12,7 @@ Une application web moderne pour la gestion complète d'un laboratoire d'analyse
 > [!TIP]  
 > Pour afficher vos photos ici, placez-les dans le dossier `/screenshots` et mettez à jour les liens ci-dessous.
 
-|              Accueil & Connexion              |                   Tableau de Bord                   |
+|               Connexion              |                   Accueil apres connexion                   |
 | :-------------------------------------------: | :-------------------------------------------------: |
 | ![Login Placeholder](./screenshots/login.png) | ![Dashboard Placeholder](./screenshots/accueil.png) |
 |      _Interface de connexion sécurisée_       |           _Vue d'ensemble des activités_            |
