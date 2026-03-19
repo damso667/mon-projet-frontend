@@ -1,38 +1,124 @@
-.navbar-brand {
-  font-size: 1.2rem;
-  letter-spacing: 0.5px;
-}
-.nav-link {
-  transition: color .2s ease;
-}
-.nav-link:hover {
-  color: #0d6efd !important;
-}
-.navbar .nav-link {
-  transition: color 0.2s ease, transform 0.2s ease;
+/* ═══════════════════════════════════════════
+   NAVBAR — Thème global app
+   ═══════════════════════════════════════════ */
+
+.custom-navbar {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
+  padding: .6rem 0;
+  box-shadow: 0 2px 12px rgba(0,0,0,.15);
 }
 
-.navbar .nav-link:hover {
-  color: #ffc107; /* jaune Bootstrap */
-  transform: translateY(-1px);
-}
-
-/* Animation discrète sur la cloche */
-.navbar .bi-bell-fill {
+/* Brand */
+.navbar-brand-custom {
+  display: flex !important;
+  align-items: center;
+  gap: .5rem;
+  text-decoration: none;
+  color: #fff !important;
+  font-weight: 700;
   font-size: 1.1rem;
-  animation: pulse 1.5s infinite;
+  transition: opacity .2s ease;
+}
+.navbar-brand-custom i {
+  font-size: 1.3rem;
+  color: #0d6efd;
+}
+.navbar-brand-custom:hover {
+  opacity: .85;
+  color: #fff !important;
 }
 
+/* Toggler — utilise l'icône Bootstrap par défaut */
+.custom-navbar .navbar-toggler {
+  border-color: rgba(255,255,255,.2);
+}
+.custom-navbar .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Nav links custom styling */
+.nav-link-custom {
+  display: flex !important;
+  align-items: center;
+  gap: .4rem;
+  color: rgba(255,255,255,.75) !important;
+  padding: .5rem .85rem !important;
+  border-radius: 8px;
+  font-size: .88rem;
+  font-weight: 500;
+  transition: all .25s ease;
+  white-space: nowrap;
+}
+.nav-link-custom i {
+  font-size: .95rem;
+  color: rgba(255,255,255,.5);
+  transition: color .25s ease;
+}
+.nav-link-custom:hover {
+  color: #fff !important;
+  background: rgba(13,110,253,.15);
+}
+.nav-link-custom:hover i {
+  color: #0d6efd;
+}
+
+/* Notification */
+.notif-link {
+  position: relative;
+}
+.bell-icon {
+  animation: pulse 2s infinite;
+}
+
+/* Logout button */
+.btn-logout {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.15);
+  color: rgba(255,255,255,.8);
+  padding: .4rem 1rem;
+  border-radius: 8px;
+  font-size: .85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+.btn-logout:hover {
+  background: rgba(220,53,69,.15);
+  border-color: rgba(220,53,69,.3);
+  color: #ff6b6b;
+}
+.btn-logout i {
+  font-size: .95rem;
+}
+
+/* Animations */
 @keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.15); }
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.12); }
   100% { transform: scale(1); }
 }
-.badge {
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
 
+/* Badge animation */
 .badge.animate {
   transform: scale(1.2);
+  transition: transform .2s ease;
 }
 
+/* Responsive */
+@media (max-width: 991px) {
+  .navbar-collapse {
+    padding-top: .75rem;
+  }
+  .nav-link-custom {
+    padding: .6rem .75rem !important;
+    border-radius: 6px;
+  }
+  .btn-logout {
+    margin-top: .5rem;
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -1,32 +1,64 @@
+<!-- Prescrire une Analyse — Enhanced Design -->
+<div class="page-wrapper">
+  <div class="container py-4">
 
-<div class="container mt-4">
-  <h3 class="mb-3">Prescrire une Analyse</h3>
-
-  <div *ngIf="message" class="alert alert-success">{{ message }}</div>
-
-  <form >
-    <div class="mb-3">
-      <label>Patient</label>
-      <select class="form-select" [(ngModel)]="selectedPatient" name="patient" required>
-              <option [ngValue]="null" disabled>— Sélectionner un patient —</option>
-        <option *ngFor="let p of patients" [value]="p.id">{{ p.nom }} {{ p.prenom }}</option>
-      </select>
+    <!-- Header de page -->
+    <div class="page-header">
+      <div class="header-icon">
+        <i class="bi bi-clipboard2-pulse"></i>
+      </div>
+      <div>
+        <h3 class="page-title">Prescrire une Analyse</h3>
+        <p class="page-subtitle">Remplissez le formulaire pour créer une nouvelle prescription</p>
+      </div>
     </div>
 
-    <div class="mb-3" >
-      <label>Type d'examen</label>
-      <select class="form-select" [(ngModel)]="selectedExamen" name="examen" required>
-      <option [ngValue]="null" disabled>— Sélectionner un type examen —</option>
-
-        <option *ngFor="let t of examens" [value]="t.id">{{ t.nom }} </option>
-      </select>
+    <!-- Message de succès/erreur -->
+    <div *ngIf="message" class="alert-custom" [class.alert-success-custom]="message.includes('✅')" [class.alert-error-custom]="!message.includes('✅')">
+      <i class="bi" [class.bi-check-circle-fill]="message.includes('✅')" [class.bi-exclamation-triangle-fill]="!message.includes('✅')"></i>
+      {{ message }}
     </div>
 
-    <div class="mb-3">
-      <label>Description</label>
-      <textarea class="form-control" [(ngModel)]="description" name="description" placeholder="donner un description"></textarea>
+    <!-- Formulaire -->
+    <div class="form-card">
+      <form>
+        <!-- Patient -->
+        <div class="input-group-custom">
+          <label class="input-label">
+            <i class="bi bi-person"></i> Patient
+          </label>
+          <select class="input-field select-field" [(ngModel)]="selectedPatient" name="patient" required>
+            <option [ngValue]="null" disabled>— Sélectionner un patient —</option>
+            <option *ngFor="let p of patients" [value]="p.id">{{ p.nom }} {{ p.prenom }}</option>
+          </select>
+        </div>
+
+        <!-- Type d'examen -->
+        <div class="input-group-custom">
+          <label class="input-label">
+            <i class="bi bi-file-earmark-medical"></i> Type d'examen
+          </label>
+          <select class="input-field select-field" [(ngModel)]="selectedExamen" name="examen" required>
+            <option [ngValue]="null" disabled>— Sélectionner un type examen —</option>
+            <option *ngFor="let t of examens" [value]="t.id">{{ t.nom }}</option>
+          </select>
+        </div>
+
+        <!-- Description -->
+        <div class="input-group-custom">
+          <label class="input-label">
+            <i class="bi bi-card-text"></i> Description
+          </label>
+          <textarea class="input-field textarea-field" [(ngModel)]="description" name="description" placeholder="Décrivez la prescription..." rows="4"></textarea>
+        </div>
+
+        <!-- Bouton -->
+        <button class="btn-submit" type="button" (click)="prescrire()">
+          <i class="bi bi-send"></i>
+          Prescrire l'analyse
+        </button>
+      </form>
     </div>
 
-    <button class="btn btn-primary" (click)="prescrire()">Prescrire</button>
-  </form>
+  </div>
 </div>

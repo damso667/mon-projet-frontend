@@ -1,11 +1,12 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+<nav class="navbar navbar-expand-lg custom-navbar">
   <div class="container-fluid">
 
-    <a class="navbar-brand fw-bold bi bi-house-door-fill" routerLink="/home">
-      Home
+    <a class="navbar-brand navbar-brand-custom" routerLink="/home">
+      <i class="bi bi-activity"></i>
+      <span>LaboratoireApp</span>
     </a>
 
-    <!-- Bouton mobile -->
+    <!-- Bouton mobile (visible uniquement < lg) -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -17,60 +18,42 @@
 
         <!-- MENU MEDECIN -->
         <ng-container *ngIf="role === 'ROLE_MEDECIN'">
-          <li class="nav-item"><a class="nav-link" routerLink="/patients" data-bs-toggle="collapse"
-              data-bs-target="#navbarNav">Patients</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/mes-patients" data-bs-toggle="collapse"
-              data-bs-target="#navbarNav">Mes Patients</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/analyses-prescrire" data-bs-toggle="collapse"
-              data-bs-target="#navbarNav">Prescrire</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/resultats" data-bs-toggle="collapse"
-              data-bs-target="#navbarNav">Résultats</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/type-examens" data-bs-toggle="collapse"
-              data-bs-target="#navbarNav">Type Examens</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/analyses-valider" data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"> Analise Valider</a></li>
+          <li class="nav-item"><a class="nav-link nav-link-custom" routerLink="/patients" data-bs-toggle="collapse" data-bs-target="#navbarNav"><i class="bi bi-people"></i> Patients</a></li>
+          <li class="nav-item"><a class="nav-link nav-link-custom" routerLink="/mes-patients" data-bs-toggle="collapse" data-bs-target="#navbarNav"><i class="bi bi-person-lines-fill"></i> Mes Patients</a></li>
+          <li class="nav-item"><a class="nav-link nav-link-custom" routerLink="/analyses-prescrire" data-bs-toggle="collapse" data-bs-target="#navbarNav"><i class="bi bi-clipboard2-pulse"></i> Prescrire</a></li>
+          <li class="nav-item"><a class="nav-link nav-link-custom" routerLink="/resultats" data-bs-toggle="collapse" data-bs-target="#navbarNav"><i class="bi bi-file-earmark-text"></i> Résultats</a></li>
+          <li class="nav-item"><a class="nav-link nav-link-custom" routerLink="/type-examens" data-bs-toggle="collapse" data-bs-target="#navbarNav"><i class="bi bi-clipboard-data"></i> Type Examens</a></li>
+          <li class="nav-item"><a class="nav-link nav-link-custom" routerLink="/analyses-valider" data-bs-toggle="collapse" data-bs-target="#navbarNav"><i class="bi bi-check-circle"></i> Analyse Validée</a></li>
           <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-1 position-relative" routerLink="/notifications">
-              <i class="bi bi-bell-fill"></i>
+            <a class="nav-link nav-link-custom notif-link" routerLink="/notifications">
+              <i class="bi bi-bell-fill bell-icon"></i>
               <span>Notifications</span>
-
-              <span *ngIf="number > 0"
-                class="badge rounded-pill bg-danger position-absolute top-0 start-100 translate-middle"
-                [class.animate]="animateBadge">
-                {{ number }}
-              </span>
+              <span *ngIf="number > 0" class="badge rounded-pill bg-danger position-absolute top-0 start-100 translate-middle" [class.animate]="animateBadge">{{ number }}</span>
             </a>
           </li>
-
         </ng-container>
 
         <!-- MENU TECHNICIEN -->
         <ng-container *ngIf="role === 'ROLE_TECHNITIEN'">
-          <li class="nav-item"><a class="nav-link" routerLink="/analyses-a-faire" data-bs-toggle="collapse"
-              data-bs-target="#navbarNav">Analyses à faire</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/mes-analyses" data-bs-toggle="collapse"
-              data-bs-target="#navbarNav">Mes Analyses</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/prelevements" data-bs-toggle="collapse"
-              data-bs-target="#navbarNav">Prélèvements</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/resultats" data-bs-toggle="collapse"
-              data-bs-target="#navbarNav">Résultats</a></li>
-          <li class="nav-item"><a class="nav-link bi bi-flask" routerLink="/reactifs" data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"> Reactifs</a></li>
+          <li class="nav-item"><a class="nav-link nav-link-custom" routerLink="/analyses-a-faire" data-bs-toggle="collapse" data-bs-target="#navbarNav"><i class="bi bi-list-check"></i> Analyses à faire</a></li>
+          <li class="nav-item"><a class="nav-link nav-link-custom" routerLink="/mes-analyses" data-bs-toggle="collapse" data-bs-target="#navbarNav"><i class="bi bi-file-earmark-medical"></i> Mes Analyses</a></li>
+          <li class="nav-item"><a class="nav-link nav-link-custom" routerLink="/prelevements" data-bs-toggle="collapse" data-bs-target="#navbarNav"><i class="bi bi-droplet"></i> Prélèvements</a></li>
+          <li class="nav-item"><a class="nav-link nav-link-custom" routerLink="/resultats" data-bs-toggle="collapse" data-bs-target="#navbarNav"><i class="bi bi-file-earmark-text"></i> Résultats</a></li>
+          <li class="nav-item"><a class="nav-link nav-link-custom" routerLink="/reactifs" data-bs-toggle="collapse" data-bs-target="#navbarNav"><i class="bi bi-flask"></i> Reactifs</a></li>
         </ng-container>
 
         <!-- MENU SECRETAIRE -->
         <ng-container *ngIf="role === 'ROLE_SECRETAIRE'">
-          <li class="nav-item"><a class="nav-link bi bi-flask" routerLink="/reactifs" data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"> Reactifs</a></li>
-          <li class="nav-item"><a class="nav-link bi bi-clipboard-data" routerLink="/type-examens"
-              data-bs-toggle="collapse" data-bs-target="#navbarNav"> Type Examens</a></li>
+          <li class="nav-item"><a class="nav-link nav-link-custom" routerLink="/reactifs" data-bs-toggle="collapse" data-bs-target="#navbarNav"><i class="bi bi-flask"></i> Reactifs</a></li>
+          <li class="nav-item"><a class="nav-link nav-link-custom" routerLink="/type-examens" data-bs-toggle="collapse" data-bs-target="#navbarNav"><i class="bi bi-clipboard-data"></i> Type Examens</a></li>
         </ng-container>
 
       </ul>
 
       <!-- Bouton déconnexion -->
       <div class="d-flex">
-        <button class="btn btn-outline-light btn-sm" (click)="logout()">
+        <button class="btn-logout" (click)="logout()">
+          <i class="bi bi-box-arrow-right"></i>
           Déconnexion
         </button>
       </div>

@@ -1,46 +1,78 @@
-<!-- src/app/analyses-validees/analyses-validees.component.html -->
+<div class="page-wrapper">
+  <div class="container py-4">
 
-<div class="container mt-4">
-  <h2 class="text-center mb-4 bi bi-check-circle"> Analyses Validées</h2>
+    <div class="page-header">
+      <div class="header-icon"><i class="bi bi-check-circle"></i></div>
+      <div>
+        <h3 class="page-title">Analyses Validées</h3>
+        <p class="page-subtitle">Historique des analyses validées par le médecin</p>
+      </div>
+    </div>
 
-  <!-- Loader -->
-  <div class="text-center" *ngIf="loading">
-    <div class="spinner-border text-success" role="status"></div>
-    <p class="mt-2">Chargement des analyses validées...</p>
-  </div>
+    <!-- Loader -->
+    <div class="loader-box" *ngIf="loading">
+      <div class="spinner-border text-primary" role="status"></div>
+      <p>Chargement des analyses validées...</p>
+    </div>
 
-  <!-- Tableau -->
-  <div *ngIf="!loading && analyses.length > 0" class="table-responsive">
-    <table class="table table-hover table-striped align-middle shadow-sm">
-      <thead class="table-dark">
-        <tr>
-          <th>ID</th>
-          <th>Type Examen</th>
-          <th>Description</th>
-          <th>Résultats</th>
-          <th>Patient</th>
-          <th>Date Analyse</th>
-          <th>Date Validation</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let analyse of analyses" class="animate__animated animate__fadeIn">
-          <td>{{ analyse.id }}</td>
-          <td>{{ analyse.typeExamenNom || 'N/A' }}</td>
-          <td>{{ analyse.description || '---' }}</td>
-          <td>
-            <span class="badge bg-success">{{ analyse.resultats || 'En attente' }}</span>
-          </td>
-          <td>{{ analyse.patientNom || ('Patient #' + analyse.patientNom) }}</td>
-          <td>{{ analyse.dateAnalyse | date:'short' }}</td>
-          <td>{{ analyse.dateValidation | date:'short' }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <!-- Table card -->
+    <div class="table-card" *ngIf="!loading && analyses.length > 0">
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Type Examen</th>
+              <th>Description</th>
+              <th>Résultats</th>
+              <th>Patient</th>
+              <th>Date Analyse</th>
+              <th>Date Validation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let analyse of analyses; let i = index" class="fade-in-row" [style.animation-delay]="(i * 0.05) + 's'">
+              <td><span class="id-badge">#{{ analyse.id }}</span></td>
+              <td>{{ analyse.typeExamenNom || 'N/A' }}</td>
+              <td><span class="desc-text">{{ analyse.description || '---' }}</span></td>
+              <td><span class="badge-result">{{ analyse.resultats || 'En attente' }}</span></td>
+              <td>
+                <div class="cell-with-icon">
+                  <i class="bi bi-person text-primary"></i>
+                  {{ analyse.patientNom || ('Patient #' + analyse.patientNom) }}
+                </div>
+              </td>
+              <td><span class="date-text">{{ analyse.dateAnalyse | date:'short' }}</span></td>
+              <td><span class="date-text">{{ analyse.dateValidation | date:'short' }}</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
-  <!-- Aucun résultat -->
-  <div *ngIf="!loading && analyses.length === 0" class="alert alert-info text-center">
-    Aucune analyse validée trouvée.
+    <!-- Mobile cards -->
+    <div class="mobile-cards" *ngIf="!loading && analyses.length > 0">
+      <div *ngFor="let analyse of analyses; let i = index" class="mobile-card fade-in-row" [style.animation-delay]="(i * 0.06) + 's'">
+        <div class="mobile-card-header">
+          <span class="id-badge">#{{ analyse.id }}</span>
+          <span class="badge-result">{{ analyse.resultats || 'En attente' }}</span>
+        </div>
+        <div class="mobile-card-body">
+          <div class="mobile-info-row"><i class="bi bi-file-earmark-medical text-primary"></i><span><strong>Examen :</strong> {{ analyse.typeExamenNom || 'N/A' }}</span></div>
+          <div class="mobile-info-row"><i class="bi bi-person text-primary"></i><span><strong>Patient :</strong> {{ analyse.patientNom }}</span></div>
+          <div class="mobile-info-row" *ngIf="analyse.description"><i class="bi bi-card-text text-muted"></i><span>{{ analyse.description }}</span></div>
+          <div class="mobile-info-row"><i class="bi bi-calendar text-muted"></i><span>Analyse : {{ analyse.dateAnalyse | date:'short' }}</span></div>
+          <div class="mobile-info-row"><i class="bi bi-calendar-check text-success"></i><span>Validé : {{ analyse.dateValidation | date:'short' }}</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty state -->
+    <div *ngIf="!loading && analyses.length === 0" class="empty-state">
+      <div class="empty-icon"><i class="bi bi-inbox"></i></div>
+      <h5>Aucune analyse validée</h5>
+      <p>Aucune analyse validée trouvée pour le moment.</p>
+    </div>
+
   </div>
 </div>

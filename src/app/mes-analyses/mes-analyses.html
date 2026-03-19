@@ -1,39 +1,79 @@
-<div class="container py-4">
-  <h2 class="mb-4">Mes analyses récupérées</h2>
+<div class="page-wrapper">
+  <div class="container py-4">
 
-  <div *ngIf="loading" class="alert alert-info">Chargement...</div>
-  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+    <div class="page-header">
+      <div class="header-icon"><i class="bi bi-file-earmark-medical"></i></div>
+      <div>
+        <h3 class="page-title">Mes analyses récupérées</h3>
+        <p class="page-subtitle">Analyses que vous avez prises en charge</p>
+      </div>
+    </div>
 
-  <table class="table table-hover table-bordered" *ngIf="analyses.length > 0">
-    <thead class="table-light">
-      <tr>
-        <th>#</th>
-        <th>Patient</th>
-        <th>Type d’examen</th>
-        <th>Description</th>
-        <th>Résultat</th>
-        <th>Date analyse</th>
-        <th>Statut</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let a of analyses">
-        <td>{{ a.id }}</td>
-        <td>{{ a.patientId }}</td>
-        <td>{{ a.typeExamenId }}</td>
-        <td>{{ a.description }}</td>
-        <td>{{ a.resultats || '-' }}</td>
-        <td>{{ a.dateAnalyse | date:'short' }}</td>
-        <td>
-          <span class="badge" [ngClass]="badgeClass(a.valide)">
-            {{ badgeText(a.valide) }}
-          </span>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    <div *ngIf="loading" class="loader-box">
+      <div class="spinner-border text-primary" role="status"></div>
+      <p>Chargement...</p>
+    </div>
 
-  <div *ngIf="!loading && analyses.length === 0" class="alert alert-secondary">
-    Aucune analyse récupérée pour le moment.
+    <div *ngIf="error" class="alert-custom alert-error-custom">
+      <i class="bi bi-exclamation-triangle-fill"></i>
+      {{ error }}
+    </div>
+
+    <div class="table-card" *ngIf="analyses.length > 0">
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Patient</th>
+              <th>Type d'examen</th>
+              <th>Description</th>
+              <th>Résultat</th>
+              <th>Date analyse</th>
+              <th>Statut</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let a of analyses; let i = index" class="fade-in-row" [style.animation-delay]="(i * 0.05) + 's'">
+              <td><span class="id-badge">#{{ a.id }}</span></td>
+              <td><div class="cell-with-icon"><i class="bi bi-person text-primary"></i>{{ a.patientId }}</div></td>
+              <td>{{ a.typeExamenId }}</td>
+              <td><span class="desc-text">{{ a.description }}</span></td>
+              <td>{{ a.resultats || '-' }}</td>
+              <td><span class="date-text">{{ a.dateAnalyse | date:'short' }}</span></td>
+              <td>
+                <span class="status-badge" [ngClass]="badgeClass(a.valide)">
+                  {{ badgeText(a.valide) }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Mobile cards -->
+    <div class="mobile-cards" *ngIf="analyses.length > 0">
+      <div *ngFor="let a of analyses; let i = index" class="mobile-card fade-in-row" [style.animation-delay]="(i * 0.06) + 's'">
+        <div class="mobile-card-header">
+          <span class="id-badge">#{{ a.id }}</span>
+          <span class="status-badge" [ngClass]="badgeClass(a.valide)">{{ badgeText(a.valide) }}</span>
+        </div>
+        <div class="mobile-card-body">
+          <div class="mobile-info-row"><i class="bi bi-person text-primary"></i><span><strong>Patient :</strong> {{ a.patientId }}</span></div>
+          <div class="mobile-info-row"><i class="bi bi-file-earmark-medical text-primary"></i><span><strong>Examen :</strong> {{ a.typeExamenId }}</span></div>
+          <div class="mobile-info-row" *ngIf="a.description"><i class="bi bi-card-text text-muted"></i><span>{{ a.description }}</span></div>
+          <div class="mobile-info-row"><i class="bi bi-clipboard-check text-muted"></i><span><strong>Résultat :</strong> {{ a.resultats || '-' }}</span></div>
+          <div class="mobile-info-row"><i class="bi bi-calendar text-muted"></i><span>{{ a.dateAnalyse | date:'short' }}</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!loading && analyses.length === 0" class="empty-state">
+      <div class="empty-icon"><i class="bi bi-inbox"></i></div>
+      <h5>Aucune analyse récupérée</h5>
+      <p>Aucune analyse récupérée pour le moment.</p>
+    </div>
+
   </div>
 </div>

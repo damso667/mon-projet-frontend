@@ -1,15 +1,33 @@
-<div class="container mt-4">
-  <h3 class="mb-3">Résultats</h3>
-  <div *ngIf="message" class="alert alert-info py-2">{{ message }}</div>
+<div class="page-wrapper">
+  <div class="container py-4">
 
-  <!-- TECHNICIEN : saisie -->
-  <ng-container *ngIf="role === 'ROLE_TECHNITIEN'">
-    <div class="card shadow-sm mb-3">
-      <div class="card-body">
-        <h6 class="mb-3">Saisir un résultat</h6>
-         <div class="row g-2 align-items-start">
+    <div class="page-header">
+      <div class="header-icon"><i class="bi bi-file-earmark-text"></i></div>
+      <div>
+        <h3 class="page-title">Résultats</h3>
+        <p class="page-subtitle">Saisie et validation des résultats d'analyses</p>
+      </div>
+    </div>
+
+    <div *ngIf="message" class="alert-custom"
+         [class.alert-success-custom]="message.includes('✅') || message.includes('succès') || message.includes('valid')"
+         [class.alert-error-custom]="message.includes('Erreur') || message.includes('erreur')"
+         [class.alert-info-custom]="!message.includes('✅') && !message.includes('succès') && !message.includes('Erreur') && !message.includes('erreur') && !message.includes('valid')">
+      <i class="bi bi-info-circle-fill"></i>
+      {{ message }}
+    </div>
+
+    <!-- TECHNICIEN : saisie -->
+    <ng-container *ngIf="role === 'ROLE_TECHNITIEN'">
+      <div class="form-card mb-4">
+        <div class="form-card-header">
+          <i class="bi bi-pencil-square text-primary"></i>
+          <h5>Saisir un résultat</h5>
+        </div>
+        <div class="row g-3 align-items-start">
           <div class="col-md-4">
-            <select class="form-select" [(ngModel)]="selectedAnalyseId" name="analyse">
+            <label class="input-label"><i class="bi bi-file-earmark-medical"></i> Analyse</label>
+            <select class="input-field select-field" [(ngModel)]="selectedAnalyseId" name="analyse">
               <option [ngValue]="null" disabled>— Sélectionner une analyse —</option>
               <option *ngFor="let a of analyses" [ngValue]="a.id">
                 #{{a.id}} • Patient {{a.patientId}} • {{a.typeExamenNom || a.typeExamenId}}
@@ -17,51 +35,104 @@
             </select>
           </div>
           <div class="col-md-6">
-            <textarea class="form-control" rows="3" placeholder="Saisir les résultats"
-                      [(ngModel)]="resultatsTexte" name="resultats"></textarea>
+            <label class="input-label"><i class="bi bi-card-text"></i> Résultats</label>
+            <textarea class="input-field textarea-field" rows="3" placeholder="Saisir les résultats" [(ngModel)]="resultatsTexte" name="resultats"></textarea>
           </div>
           <div class="col-md-2 d-grid">
-            <button class="btn btn-primary" (click)="soumettre()" [disabled]="!selectedAnalyseId || !resultatsTexte.trim()">Enregistrer</button>
+            <label class="input-label d-none d-md-block">&nbsp;</label>
+            <button class="btn-submit" (click)="soumettre()" [disabled]="!selectedAnalyseId || !resultatsTexte.trim()">
+              <i class="bi bi-send"></i> Enregistrer
+            </button>
           </div>
         </div>
       </div>
+
+      <div class="section-label">
+        <i class="bi bi-clock-history text-primary"></i>
+        <h6>Analyses en cours</h6>
+      </div>
+      <div class="table-card">
+        <div class="table-responsive">
+          <table class="custom-table">
+            <thead><tr><th>ID</th><th>Patient</th><th>Type Examen</th><th>État</th></tr></thead>
+            <tbody>
+              <tr *ngFor="let a of analyses; let i = index" class="fade-in-row" [style.animation-delay]="(i * 0.05) + 's'">
+                <td><span class="id-badge">#{{a.id}}</span></td>
+                <td><div class="cell-with-icon"><i class="bi bi-person text-primary"></i>{{a.patientId}}</div></td>
+                <td>{{a.typeExamenNom || a.typeExamenId}}</td>
+                <td><span class="status-badge status-warning">En cours</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Mobile cards technicien -->
+      <div class="mobile-cards">
+        <div *ngFor="let a of analyses; let i = index" class="mobile-card fade-in-row" [style.animation-delay]="(i * 0.06) + 's'">
+          <div class="mobile-card-header">
+            <span class="id-badge">#{{a.id}}</span>
+            <span class="status-badge status-warning">En cours</span>
+          </div>
+          <div class="mobile-card-body">
+            <div class="mobile-info-row"><i class="bi bi-person text-primary"></i><span>Patient : {{a.patientId}}</span></div>
+            <div class="mobile-info-row"><i class="bi bi-file-earmark-medical text-primary"></i><span>{{a.typeExamenNom || a.typeExamenId}}</span></div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- MEDECIN : validation -->
+    <ng-container *ngIf="role === 'ROLE_MEDECIN'">
+      <div class="section-label">
+        <i class="bi bi-clipboard-check text-primary"></i>
+        <h6>Résultats à valider</h6>
+      </div>
+      <div class="table-card">
+        <div class="table-responsive">
+          <table class="custom-table">
+            <thead><tr><th>ID</th><th>Patient</th><th>Type Examen</th><th>Résultats</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr *ngFor="let a of analyses; let i = index" class="fade-in-row" [style.animation-delay]="(i * 0.05) + 's'">
+                <td><span class="id-badge">#{{a.id}}</span></td>
+                <td><div class="cell-with-icon"><i class="bi bi-person text-primary"></i>{{a.patientId}}</div></td>
+                <td>{{a.typeExamenNom || a.typeExamenId}}</td>
+                <td><span class="badge-result">{{a.resultats || '—'}}</span></td>
+                <td>
+                  <button class="btn-validate" (click)="valider(a.id)">
+                    <i class="bi bi-check-lg"></i> Valider
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Mobile cards medecin -->
+      <div class="mobile-cards">
+        <div *ngFor="let a of analyses; let i = index" class="mobile-card fade-in-row" [style.animation-delay]="(i * 0.06) + 's'">
+          <div class="mobile-card-header">
+            <span class="id-badge">#{{a.id}}</span>
+            <span class="badge-result">{{a.resultats || '—'}}</span>
+          </div>
+          <div class="mobile-card-body">
+            <div class="mobile-info-row"><i class="bi bi-person text-primary"></i><span>Patient : {{a.patientId}}</span></div>
+            <div class="mobile-info-row"><i class="bi bi-file-earmark-medical text-primary"></i><span>{{a.typeExamenNom || a.typeExamenId}}</span></div>
+          </div>
+          <button class="btn-validate btn-validate-full" (click)="valider(a.id)">
+            <i class="bi bi-check-lg"></i> Valider
+          </button>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- fallback -->
+    <div *ngIf="!role" class="empty-state">
+      <div class="empty-icon"><i class="bi bi-lock"></i></div>
+      <h5>Accès requis</h5>
+      <p>Veuillez vous connecter pour voir les résultats.</p>
     </div>
 
-    <h6 class="mb-2">Analyses en cours</h6>
-    <table class="table table-hover table-striped">
-      <thead class="table-dark">
-        <tr><th>ID</th><th>Patient</th><th>Type Examen</th><th>État</th></tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let a of analyses" class="fade-row">
-          <td>{{a.id}}</td>
-          <td>{{a.patientId}}</td>
-          <td>{{a.typeExamenNom || a.typeExamenId}}</td>
-          <td><span class="badge bg-warning">En cours</span></td>
-        </tr>
-      </tbody>
-    </table>
-  </ng-container>
-
-  <!-- MEDECIN : consultation / validation -->
-  <ng-container *ngIf="role === 'ROLE_MEDECIN'">
-    <h6 class="mb-2">Résultats à valider</h6>
-    <table class="table table-hover table-striped">
-      <thead class="table-dark">
-        <tr><th>ID</th><th>Patient-ID</th><th>Type-Examen ID</th><th>Résultats</th><th>Action</th></tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let a of analyses" class="fade-row">
-          <td>{{a.id}}</td>
-          <td>{{a.patientId}}</td>   
-          <td>{{a.typeExamenNom || a.typeExamenId}}</td>
-          <td ><span class="badge bg-success">{{a.resultats || '—'}}</span></td>
-          <td><button class="btn btn-sm btn-success" (click)="valider(a.id)">Valider</button></td>
-        </tr>
-      </tbody>
-    </table>
-  </ng-container>
-
-  <!-- fallback -->
-  <div *ngIf="!role" class="alert alert-warning">Veuillez vous connecter pour voir les résultats.</div>
+  </div>
 </div>

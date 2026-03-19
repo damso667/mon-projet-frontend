@@ -1,38 +1,118 @@
-<div class="container mt-4">
-  <h3 class="mb-3">Analyses à Faire</h3>
+<!-- Analyses à Faire — Enhanced Design -->
+<div class="page-wrapper">
+  <div class="container py-4">
 
-  <div *ngIf="message" class="alert alert-info">{{ message }}</div>
+    <!-- Header de page -->
+    <div class="page-header">
+      <div class="header-icon">
+        <i class="bi bi-list-check"></i>
+      </div>
+      <div>
+        <h3 class="page-title">Analyses à Faire</h3>
+        <p class="page-subtitle">Liste des analyses en attente de prise en charge</p>
+      </div>
+    </div>
 
-  <table class="table table-hover table-striped" *ngIf="analyses.length > 0">
-    <thead class="table-dark">
-      <tr>
-        <th>ID</th>
-        <th>Patient </th>
-        <th>Médecin </th>
-        <th>Type Examen </th>
-        <th>Description</th>
-        <th>Date D'Envoie</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let a of analyses" class="fade-in-row">
-        <td>{{ a.id }}</td>
-        <td>{{ a.patientId }}</td>
-        <td>Dr {{ a.medecinId }}</td>
-        <td>{{ a.typeExamenId }}</td>
-        <td>{{ a.description }}</td>
-        <td>{{ a.dateAnalyse | date: 'short' }}</td>
-        <td>
-          <button class="btn btn-sm btn-primary" (click)="prendreAnalyse(a.id)">
-            Prendre
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    <!-- Message -->
+    <div *ngIf="message" class="alert-custom"
+         [class.alert-success-custom]="message.includes('✅')"
+         [class.alert-error-custom]="!message.includes('✅')">
+      <i class="bi" [class.bi-check-circle-fill]="message.includes('✅')"
+         [class.bi-exclamation-triangle-fill]="!message.includes('✅')"></i>
+      {{ message }}
+    </div>
 
-  <div *ngIf="analyses.length === 0 && !message" class="alert alert-warning">
-    Aucune analyse disponible pour le moment.
+    <!-- Table card -->
+    <div class="table-card" *ngIf="analyses.length > 0">
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Patient</th>
+              <th>Médecin</th>
+              <th>Type Examen</th>
+              <th>Description</th>
+              <th>Date d'envoi</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let a of analyses; let i = index" class="fade-in-row" [style.animation-delay]="(i * 0.05) + 's'">
+              <td>
+                <span class="id-badge">#{{ a.id }}</span>
+              </td>
+              <td>
+                <div class="cell-with-icon">
+                  <i class="bi bi-person text-primary"></i>
+                  {{ a.patientId }}
+                </div>
+              </td>
+              <td>
+                <div class="cell-with-icon">
+                  <i class="bi bi-heart-pulse text-purple"></i>
+                  Dr {{ a.medecinId }}
+                </div>
+              </td>
+              <td>{{ a.typeExamenId }}</td>
+              <td>
+                <span class="desc-text">{{ a.description }}</span>
+              </td>
+              <td>
+                <span class="date-text">{{ a.dateAnalyse | date: 'short' }}</span>
+              </td>
+              <td>
+                <button class="btn-action" (click)="prendreAnalyse(a.id)">
+                  <i class="bi bi-hand-index-thumb"></i>
+                  Prendre
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Card Mobile (visible < 768px) -->
+    <div class="mobile-cards" *ngIf="analyses.length > 0">
+      <div *ngFor="let a of analyses; let i = index" class="mobile-card fade-in-row" [style.animation-delay]="(i * 0.06) + 's'">
+        <div class="mobile-card-header">
+          <span class="id-badge">#{{ a.id }}</span>
+          <span class="date-text">{{ a.dateAnalyse | date: 'short' }}</span>
+        </div>
+        <div class="mobile-card-body">
+          <div class="mobile-info-row">
+            <i class="bi bi-person text-primary"></i>
+            <span><strong>Patient :</strong> {{ a.patientId }}</span>
+          </div>
+          <div class="mobile-info-row">
+            <i class="bi bi-heart-pulse text-purple"></i>
+            <span><strong>Médecin :</strong> Dr {{ a.medecinId }}</span>
+          </div>
+          <div class="mobile-info-row">
+            <i class="bi bi-file-earmark-medical text-primary"></i>
+            <span><strong>Examen :</strong> {{ a.typeExamenId }}</span>
+          </div>
+          <div class="mobile-info-row" *ngIf="a.description">
+            <i class="bi bi-card-text text-muted"></i>
+            <span class="desc-text">{{ a.description }}</span>
+          </div>
+        </div>
+        <button class="btn-action btn-action-full" (click)="prendreAnalyse(a.id)">
+          <i class="bi bi-hand-index-thumb"></i>
+          Prendre cette analyse
+        </button>
+      </div>
+    </div>
+
+    <!-- Aucune analyse -->
+    <div *ngIf="analyses.length === 0 && !message" class="empty-state">
+      <div class="empty-icon">
+        <i class="bi bi-inbox"></i>
+      </div>
+      <h5>Aucune analyse disponible</h5>
+      <p>Il n'y a aucune analyse en attente pour le moment.</p>
+    </div>
+
   </div>
 </div>

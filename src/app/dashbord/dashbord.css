@@ -1,14 +1,17 @@
-.action-card {
-  cursor: pointer;
-  transition: transform .2s ease, box-shadow .2s ease;
-  border-radius: 1rem;
-}
-.action-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 20px rgba(0,0,0,.12);
-}
-
-.bi{
-  font-size: 2.5rem ;
-  color: #0d6efd !important;
-}
+.page-wrapper{min-height:calc(100vh - 56px);background:transparent}
+.page-header{text-align:center;margin-bottom:2rem;animation:fadeUp .5s ease}
+.header-icon{width:60px;height:60px;background:rgba(13,110,253,.08);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.7rem;color:#0d6efd;margin:0 auto 1rem}
+.page-title{font-weight:700;font-size:1.5rem;margin:0 0 .3rem;background:linear-gradient(90deg,#0d6efd,#6f42c1);-webkit-background-clip:text;background-clip:text;color:transparent}
+.page-subtitle{font-size:.88rem;color:#6c757d;margin:0}
+.actions-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1.25rem}
+.action-card{background:#fff;border-radius:18px;padding:1.75rem 1.25rem;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.05);cursor:pointer;transition:all .3s ease;position:relative;overflow:hidden;border:1px solid rgba(0,0,0,.04)}
+.action-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#0d6efd,#6f42c1);transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.action-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,0,0,.08);border-color:transparent}
+.action-card:hover::before{transform:scaleX(1)}
+.action-icon{width:52px;height:52px;background:rgba(13,110,253,.08);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto .85rem}
+.action-icon i{font-size:1.4rem;color:#0d6efd}
+.action-card h6{font-weight:600;font-size:.92rem;color:#212529;margin:0}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.fade-in-row{animation:fadeUp .5s ease both}
+@media(max-width:768px){.actions-grid{grid-template-columns:repeat(2,1fr);gap:1rem}.action-card{padding:1.25rem 1rem}}
+@media(max-width:480px){.actions-grid{grid-template-columns:1fr}.page-title{font-size:1.3rem}}
