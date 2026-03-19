@@ -24,7 +24,9 @@ export interface Notification {
   providedIn: 'root'
 })
 export class Medecin {
-  private apiUrl = 'https://backend-mon-projet-0f46.onrender.com/api/medecins';
+  private apiUrl = window.location.hostname === 'localhost' 
+    ? 'http://localhost:8080/api/medecins' 
+    : 'https://backend-mon-projet-0f46.onrender.com/api/medecins';
 
   constructor(private http: HttpClient) {}
 

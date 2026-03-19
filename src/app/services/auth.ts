@@ -7,7 +7,9 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class Auth {
-    private apiUrl = 'https://backend-mon-projet-0f46.onrender.com/api'; 
+    private apiUrl = window.location.hostname === 'localhost' 
+    ? 'http://localhost:8080/api' 
+    : 'https://backend-mon-projet-0f46.onrender.com/api'; 
   private roleSubject = new BehaviorSubject<string | null>(null);
   role$ = this.roleSubject.asObservable();
 

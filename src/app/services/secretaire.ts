@@ -25,7 +25,9 @@ export interface ReactifRequest {
   providedIn: 'root'
 })
 export class Secretaire {
-  private apiUrl = 'https://backend-mon-projet-0f46.onrender.com/api/secretaires';
+  private apiUrl = window.location.hostname === 'localhost' 
+    ? 'http://localhost:8080/api/secretaires' 
+    : 'https://backend-mon-projet-0f46.onrender.com/api/secretaires';
 
   constructor(private http: HttpClient) {}
 

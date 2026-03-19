@@ -6,7 +6,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TypeExamen {
-  private ApiUrl = "https://backend-mon-projet-0f46.onrender.com/api/type-examens";
+  private ApiUrl = window.location.hostname === 'localhost' 
+    ? 'http://localhost:8080/api/type-examens' 
+    : 'https://backend-mon-projet-0f46.onrender.com/api/type-examens';
 
   constructor(private http: HttpClient){}
 
