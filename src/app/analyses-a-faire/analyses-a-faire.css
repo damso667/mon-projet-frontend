@@ -150,11 +150,9 @@
 .desc-text {
   color: #6c757d;
   font-size: .85rem;
-  max-width: 180px;
   display: inline-block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .date-text {
